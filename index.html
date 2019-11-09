@@ -13,30 +13,54 @@
 
 <body>
   <nav class="navbar fixed-top navbar-light bg-light">
-    <a class="navbar-brand" href="#">Fixed top</a>
+    <a class="navbar-text" href="google.com">
+      High Scores</a>
+    <a class="navbar-brand">JavaScript Quiz</a>
     <span class="navbar-text">
-      Navbar text with an inline element
+      Timer: <span id="timer">0</span>
     </span>
   </nav>
 
-<div class="row justify-content-center">
-  <div class="col col-sm-10 col-md-8 align-self-center">
-  <div class="card">
-    <h5 class="card-header">Featured</h5>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div id="initalCard">
+    <div class="row justify-content-center">
+      <div class="col col-sm-10 col-md-8 align-self-center">
+        <div class="card text-center">
+          <h5 class="card-header question">Previous High Score</h5>
+          <div class="card-body">
+            <h5 class="card-title">Click the button to begin!</h5>
+            <p class="card-text">Careful - wrong answers will also subtract time!</p>
+            <span id="startButton" class="btn btn-primary">Start!</span>
+          </div>
+          <div class="card-footer text-muted">
+            footer
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
+
+  <div id="questionCard">
+    <div class="row justify-content-center">
+      <div class="col col-sm-10 col-md-8 align-self-center">
+        <div class="card text-center">
+          <h5 class="card-header question">Question 1</h5>
+          <div class="card-body">
+            <h5 class="card-title">Select your answer below:</h5>
+            <p class="card-text">Careful - wrong answers will also subtract time!</p>
+            <span id="startButton" class="btn btn-primary">Start!</span>
+          </div>
+          <div class="card-footer text-muted">
+            Answer:
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
-
-    
-        <script src="./assets/JavaScript/script.js"></script>
-        <script src="./assets/JavaScript/questions.js"></script>
+  <script src="./assets/JavaScript/script.js"></script>
+  <script src="./assets/JavaScript/questions.js"></script>
 </body>
+
 </html>
