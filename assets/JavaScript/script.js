@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", function (event) {  //waits for pa
     var scoreLink = document.getElementById("scoreLink");
     var scoreCard = document.getElementById("scoreCard");
     var highScoreList = document.querySelector("#highScore-list");
+    var instructions = document.getElementById("instructions");
+
 
     var questText = document.getElementById("questionPrompt");
     // var answerBtns = document.getElementById("answerArea");
@@ -31,6 +33,8 @@ document.addEventListener("DOMContentLoaded", function (event) {  //waits for pa
     //variable stack - noramlly wouldn't use globals but it's a small application (and I'm novice)
     var problemTime = 10;    //time per question and points factor
     var penalty = 5;        //time penalty for a wrong answer
+    //Modify the above to change the quiz dynamics
+    
     var iter = 0;
     var timer = 75;
     var endTime = 0;
@@ -42,6 +46,10 @@ document.addEventListener("DOMContentLoaded", function (event) {  //waits for pa
     var scoreList = [];
     var maxScore = 0;
     var scoreShown = false;
+
+    //dynamic instructions based upon quiz dynamics
+    instructions.textContent = ("Your score is the number of correct answers times "+problemTime+", plus the time remaining. Careful - wrong answers will also subtract "+penalty+" seconds from the time remaining!");
+
 
     /**
      * Randomize array element order in-place.
