@@ -1,5 +1,5 @@
 # ANZ-Code-Quiz
-JHU Full Stack Bootcamp homework #3 - creating a JavaScript Quiz
+JHU Full Stack Bootcamp homework #4 - creating a JavaScript Quiz, with, JavaScript
 # A JavaScript application that teaches the user (and developer!) JavaScript
 
 This is a basic web-app designed to test the user's knowledge of JavaScript, while giving the developer practice with concepts in JS including HTML manipulation, events, linking functions, and objects.
