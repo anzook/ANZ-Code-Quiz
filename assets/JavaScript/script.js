@@ -128,6 +128,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
             console.log(iter);
             timer -= 5; //5 seconds lost for wrong answer
             wrong++;
+            if (wrong > 1) {
+                questCard.classList.remove("shake");
+                void questCard.offsetWidth;  //animation restart fix
+                questCard.classList.add("shake");
+
+            } else { questCard.classList.add("shake"); }
             footer.textContent = "Wrong!"
         }
         if (iter < (newQuestions.length - 1)) {
