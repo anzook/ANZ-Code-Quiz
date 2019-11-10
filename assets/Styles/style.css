@@ -1,5 +1,6 @@
 body {
     padding-top: 70px;
+    background-color: gray;
   }
 
   textarea {
@@ -9,4 +10,17 @@ body {
 
   #questionCard {
       display: none;
+  }
+
+  .navbar-text {
+    font-weight: bold;
+  }
+
+  #scoreCard {
+
+    margin-top: 20px;
+  }
+
+  #scoreCard {
+    display: none;
   }
