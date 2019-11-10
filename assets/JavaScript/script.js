@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var questCard = document.getElementById("questionCard");
     var timerDisp = document.getElementById("timer");
     var alert = document.getElementById("alert");
+    var footer = document.getElementById("footer");
+    var scoreLink = document.getElementById("scoreLink");
     // var buttons = document.querySelectorAll(".btn")
 
     var questText = document.getElementById("questionPrompt");
@@ -72,6 +74,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
         beginGame();
     });
 
+    scoreLink.addEventListener("click", function (event) {
+        event.preventDefault();
+        var storedScores = JSON.parse(localStorage.getItem("scoreList"));
+        console.log(storedScores);
+    });
+
     function endGame() {
         clearInterval(interval);
         endTime = timer;
@@ -80,11 +88,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log("wins " + correct + ", Losses " + wrong + ", " + endTime);
         initCard.style.display = "block";
         questCard.style.display = "none";
+        var scoreList = [];
     var highscore = {
         score: (correct * problemTime + endTime),
     user: prompt(`Your score is ${correct * problemTime + endTime}. Enter your initials:`)  
     }
-
+    scoreList = push(highscore);
+    localStorage.setItem("scores", JSON.stringify(scoreList));
 }
 
 
@@ -126,11 +136,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     console.log("win");
                     console.log(iter);
                     correct++;
+                    footer.textContent = "Right!"
                 } else {
                     console.log("lose");
                     console.log(iter);
                     timer -= 5; //5 seconds lost for wrong answer
                     wrong++;
+                    footer.textContent = "Wrong!"
                 }
                 if (iter < (newQuestions.length - 1)) {
                     iter++;
