@@ -211,7 +211,8 @@ function clearScores() {
         iter = 0;
         timer = questions.length * problemTime;  //sets initial timer length
 
-
+        questCard.classList.remove("shake");  //initializes animation styles
+        void questCard.offsetWidth;  //animation restart fix
 
         newQuestions = shuffle(newQuestions);   //randomly arranges questions
 
