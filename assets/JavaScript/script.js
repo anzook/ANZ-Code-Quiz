@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function (event) {  //waits for pa
 
     //variable stack - noramlly wouldn't use globals but it's a small application (and I'm novice)
     var problemTime = 10;    //time per question and points factor
+    var penalty = 5;        //time penalty for a wrong answer
     var iter = 0;
     var timer = 75;
     var endTime = 0;
@@ -130,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function (event) {  //waits for pa
         } else {
             console.log("lose");
             console.log(iter);
-            timer -= 5; //5 seconds lost for wrong answer
+            timer -= penalty; //5 seconds (or penalty) lost for wrong answer
             wrong++;
             if (wrong > 1) {
                 questCard.classList.remove("shake");
