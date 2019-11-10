@@ -11,7 +11,7 @@ Building this was a challenege for the juinior (at this stage) developer, as it 
 ## Viewing and using the website
 
 Github Pages link: (https://anzook.github.io/ANZ-Code-Quiz/)
-![Mainpage Screenshot Demo](assets/images/CodeQuizSS.png?raw=true "Password Generator Page")
+![Mainpage Screenshot Demo](https://github.com/anzook/ANZ-Code-Quiz/blob/master/assets/Images/CodeQuizSS.png)
 
 Scoring is caluclated as: (number of questions correct) X ([const]time set per question) + (time remaining)
 
