@@ -1,5 +1,10 @@
 var questions = [
-    {
+  {
+    title: "for (i = 0; i < cars.length; i++) \{ \n text += cars[i]; \}",
+    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+    answer: "parentheses"
+  },
+  {
       title: "Commonly used data types DO NOT include:",
       choices: ["strings", "booleans", "alerts", "numbers"],
       answer: "alerts"
@@ -9,5 +14,6 @@ var questions = [
       choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
       answer: "parentheses"
     }
+    
   ];
   
