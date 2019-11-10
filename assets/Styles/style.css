@@ -16,9 +16,46 @@ body {
     font-weight: bold;
   }
 
+  #timerText {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    display: inline-block;
+    font-weight: bold;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+  }
+
   #scoreCard {
 
     margin-top: 20px;
+  }
+
+  div.listBody {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    text-align: left;
+  }
+
+  /* some CSS Tricks lists styling */
+  ol {
+    list-style: none;
+    counter-reset: my-awesome-counter;
+  }
+  ol li {
+    counter-increment: my-awesome-counter;
+  }
+  ol li::before {
+    content: counter(my-awesome-counter) ". ";
+    color: #007bff;
+    font-weight: bold;
+    text-align: left;
   }
 
   .shake {

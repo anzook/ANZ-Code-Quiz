@@ -1,5 +1,6 @@
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", function (event) {  //waits for page load
+    //DOM targeting elements
     var startBtn = document.getElementById("startButton");
 
     var initCard = document.getElementById("initalCard");
@@ -11,25 +12,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var scoreCard = document.getElementById("scoreCard");
     var highScoreList = document.querySelector("#highScore-list");
 
-    // var buttons = document.querySelectorAll(".btn")
-
     var questText = document.getElementById("questionPrompt");
-    var answerBtns = document.getElementById("answerArea");
+    // var answerBtns = document.getElementById("answerArea");
     var clearBtn = document.getElementById("clearBtn");
     var clearBtnArea = document.getElementById("clearBtnArea");
 
-
+    //Answer texts
     var a = document.getElementById("AAnswer");
     var b = document.getElementById("BAnswer");
     var c = document.getElementById("CAnswer");
     var d = document.getElementById("DAnswer");
-
+    //Answer buttons
     var aBtn = document.getElementById("AAnswerBtn");
     var bBtn = document.getElementById("BAnswerBtn");
     var cBtn = document.getElementById("CAnswerBtn");
     var dBtn = document.getElementById("DAnswerBtn");
 
-    var problemTime = 15;    //time per question
+    //variable stack - noramlly wouldn't use globals but it's a small application (and I'm novice)
+    var problemTime = 10;    //time per question and points factor
     var iter = 0;
     var timer = 75;
     var endTime = 0;
@@ -61,10 +61,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
             array[currentIndex] = array[randomIndex];
             array[randomIndex] = temporaryValue;
         }
-
         return array;
     }
 
+    //resets card content to the next questions
     function setQuestion(index) {
         questText.textContent = questions[index].title;
         let choiceArray = questions[index].choices
@@ -83,25 +83,28 @@ document.addEventListener("DOMContentLoaded", function (event) {
         beginGame();
     });
 
+    //toggle for score list
     scoreLink.addEventListener("click", function (event) {
         event.preventDefault();
         if (scoreShown) {
             scoreShown = false;
-            scoreCard.style.display = "none";        
+            scoreCard.style.display = "none";
         } else {
-                scoreShown = true;  
-                scoreCard.style.display = "block";     
-            }
-   scoreSet();
+            scoreShown = true;
+            scoreCard.style.display = "block";
+        }
+        scoreSet();
     });
 
     scoreCard.style.display = "none";  //defulat scores to hidden
 
+    //clear for saved scores
     clearBtn.addEventListener("click", function (event) {
         event.preventDefault();
         clearScores();
     });
 
+    //assigns listeners to answer buttons
     var addBtns = document.getElementsByClassName("answerBtn");
     for (var i = 0; i < addBtns.length; i++) {
         // addBtns[i].removeEventListener("click",userChoice,false);
@@ -109,13 +112,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     }
 
+    //runs initial scoreSet in case there is saved data
     scoreSet();
 
+    //when the user selects an answer this checks if it's correct
     function userChoice(event) {
-        let userAnswer = "";
+        event.preventDefault();
 
-        // event.preventDefault();
-        // event.stopPropagation();
+        let userAnswer = "";
         userAnswer = event.target.nextElementSibling.textContent;
         // console.log(userAnswer);
         if (userAnswer === newQuestions[iter].answer) {
@@ -139,51 +143,50 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (iter < (newQuestions.length - 1)) {
             iter++;
             setQuestion(iter);
-        } else if (iter === (newQuestions.length - 1)) {
+        } else if (iter === (newQuestions.length - 1)) {  //fix to add counter to kick out of game but not reset question to undefined
             iter++;
         }
 
     }
 
-function scoreSet() {
-    scoreList = JSON.parse(localStorage.getItem("scores") || "[]");
-    highScoreList.innerHTML = "";  
-    console.log(scoreList);
+    //builds scorecard 
+    function scoreSet() {
+        scoreList = JSON.parse(localStorage.getItem("scores") || "[]");
+        highScoreList.innerHTML = "";
+        console.log(scoreList);
 
-    scoreList.sort(function(a, b) {  //sort scores descending
-        return parseInt(b.score) - parseInt(a.score);  //simple sort function, if positive, sorts higher, negative, sorts lower
-    });
-    console.log(scoreList);
+        scoreList.sort(function (a, b) {  //sort scores descending
+            return parseInt(b.score) - parseInt(a.score);  //simple sort function, if positive, sorts higher, negative, sorts lower
+        });
+        console.log(scoreList);
 
-    if ( scoreList.length === 0) {
-        clearBtnArea.style.display = "none";
-        alert.textContent = "Se how well you can do!";
-    } else {
-        clearBtnArea.style.display = "block";
-        maxScore = scoreList[0].score; //current high score
-    alert.textContent = "Previous high score: " + maxScore;
+        if (scoreList.length === 0) {  //checks if there are stored values
+            clearBtnArea.style.display = "none";
+            alert.textContent = "Se how well you can do!";
+        } else {
+            clearBtnArea.style.display = "block";
+            maxScore = scoreList[0].score; //current high score
+            alert.textContent = "Previous high score: " + maxScore;
+        }
+        //builds score list
+        for (let j = 0; j < scoreList.length; j++) {
+            var scoreDisp = scoreList[j].user + ": " + scoreList[j].score;
+
+            var li = document.createElement("li");
+            li.textContent = scoreDisp;
+            highScoreList.appendChild(li);
+        }
     }
 
-    
+        //clears saved scores and storage
+    function clearScores() {
+        scoreList = [];
+        localStorage.setItem("scores", JSON.stringify(scoreList));
+        scoreSet();
 
-    for (let j = 0; j < scoreList.length; j++) {
-      var scoreDisp = scoreList[j].user + ": " + scoreList[j].score;
-  
-      var li = document.createElement("li");
-      li.textContent = scoreDisp;  
-      highScoreList.appendChild(li);
     }
 
-
-}
-
-function clearScores() {
-    scoreList = [];
-    localStorage.setItem("scores", JSON.stringify(scoreList));
-    scoreSet();
-
-}
-
+    //ends the run of the game, caclulates and stores score
     function endGame() {
         clearInterval(interval);
         endTime = timer;
@@ -193,18 +196,21 @@ function clearScores() {
         initCard.style.display = "block";
         questCard.style.display = "none";
 
-        let highscore = (correct * problemTime + endTime);
-        let userInput = prompt(`Your score is ${correct * problemTime + endTime}. Enter your initials:`);
-
+        let highscore = (correct * problemTime + endTime);  //score formula
+        let userInput = prompt(`Your score is ${correct * problemTime + endTime}. Enter your initials:`);  //given more time, I wouldn't use a prompt
+        if (userInput === null) {  //prevents saving nulls if no user input
+            userInput = "???";
+        }
         scoreList = JSON.parse(localStorage.getItem("scores") || "[]");
-        scoreList.push({score: highscore, user: userInput});
+        scoreList.push({ score: highscore, user: userInput });
 
         localStorage.setItem("scores", JSON.stringify(scoreList));
         scoreSet();
 
+        footer.textContent = "Going to better your score..?";  //get sassy on a repeat
     }
 
-
+ // starts the game, initializes counters and intervals and prompts user
     function beginGame() {
         correct = 0;
         wrong = 0;
@@ -223,10 +229,10 @@ function clearScores() {
             timerDisp.textContent = timer;
             timer--;
 
-            if (timer < 0) {
+            if (timer < 0) {  //ends game if time runs out
                 endGame();
 
-            } else if (iter >= newQuestions.length) {
+            } else if (iter >= newQuestions.length) {   //ends game if questions run out
                 endGame();
             }
 
@@ -238,3 +244,4 @@ function clearScores() {
 
 });
 
+// ;) hi there!

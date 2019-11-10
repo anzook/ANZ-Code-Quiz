@@ -18,11 +18,12 @@
     <span id="scoreLink" class="navbar-text btn btn-primary">
       High Scores</span>
     <a class="navbar-brand">JavaScript Quiz</a>
-    <span class="navbar-text">
+    <span id="timerText" class="navbar-text">
       Timer: <span id="timer">0</span>
     </span>
   </nav>
 
+  <!-- container for the home screen -->
   <div id="initalCard">
     <div class="row justify-content-center">
       <div class="col col-sm-10 col-md-8 align-self-center">
@@ -30,17 +31,19 @@
           <h5 id="alert" class="card-header">Previous High Score</h5>
           <div class="card-body">
             <h5 class="card-title">Click the button to begin!</h5>
-            <p class="card-text">Careful - wrong answers will also subtract time!</p>
+            <p class="card-text">Your score is the number of correct answers times ten, plus the time
+              remaining.<br />Careful - wrong answers will also subtract time!</p>
             <span id="startButton" class="btn btn-primary">Start!</span>
           </div>
           <div class="card-footer text-muted">
-            
+
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- container for the questions  -->
   <div id="questionCard">
     <div class="row justify-content-center">
       <div class="col col-sm-10 col-md-8 align-self-center">
@@ -69,12 +72,13 @@
     </div>
   </div>
 
+  <!-- container for the list of scores -->
   <div id="scoreCard">
     <div class="row justify-content-center">
       <div class="col col-sm-10 col-md-8 align-self-center">
         <div class="card text-center">
-          <h5 id="alert" class="card-header">High Scores:</h5>
-          <div class="card-body">
+          <h5 class="card-header">High Scores:</h5>
+          <div class="listBody card-body">
             <ol id="highScore-list"></ol>
           </div>
           <div id="clearBtnArea" class="card-footer text-muted">
