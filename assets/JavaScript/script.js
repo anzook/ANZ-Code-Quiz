@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var wrong = 0;
     var user = "";
     var score = 0;
+    var newQuestions = questions;
 
     /**
      * Randomize array element order in-place.
@@ -80,6 +81,41 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log(storedScores);
     });
 
+    var addBtns = document.getElementsByClassName("answerBtn");
+    for (var i = 0; i < addBtns.length; i++) {
+        // addBtns[i].removeEventListener("click",userChoice,false);
+        addBtns[i].addEventListener("click", userChoice,false);
+        
+    }
+
+    function userChoice(event) { 
+        let userAnswer = "";
+    
+        // event.preventDefault();
+        // event.stopPropagation();
+            userAnswer = event.target.nextElementSibling.textContent;
+            // console.log(userAnswer);
+            if (userAnswer === newQuestions[iter].answer) {
+                console.log("win");
+                console.log(iter);
+                correct++;
+                footer.textContent = "Right!"
+            } else {
+                console.log("lose");
+                console.log(iter);
+                timer -= 5; //5 seconds lost for wrong answer
+                wrong++;
+                footer.textContent = "Wrong!"
+            }
+            if (iter < (newQuestions.length - 1)) {
+                iter++;
+                setQuestion(iter);
+            } else if (iter === (newQuestions.length - 1)) {
+                iter++;
+            }
+    
+    }
+
     function endGame() {
         clearInterval(interval);
         endTime = timer;
@@ -105,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         timer = questions.length * problemTime;  //sets initial timer length
 
 
-        let newQuestions = questions;
+        
         newQuestions = shuffle(newQuestions);   //randomly arranges questions
 
         setQuestion(iter);
@@ -124,36 +160,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
         }, 1000);
-
-
-        answerBtns.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            if (event.target.matches(".btn")) {
-                let userAnswer = event.target.nextElementSibling.textContent;
-                // console.log(userAnswer);
-                if (userAnswer === newQuestions[iter].answer) {
-                    console.log("win");
-                    console.log(iter);
-                    correct++;
-                    footer.textContent = "Right!"
-                } else {
-                    console.log("lose");
-                    console.log(iter);
-                    timer -= 5; //5 seconds lost for wrong answer
-                    wrong++;
-                    footer.textContent = "Wrong!"
-                }
-                if (iter < (newQuestions.length - 1)) {
-                    iter++;
-                    setQuestion(iter);
-                } else if (iter === (newQuestions.length - 1)) {
-                    iter++;
-                }
-            }
-
-        });
-
 
     }
 
